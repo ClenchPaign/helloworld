@@ -1,9 +1,5 @@
-RnD API Management : Configuring External Elasticsearch for API Gateway 10.2  
-
-1.  [RnD API Management](index.html)
-
-RnD API Management : Configuring External Elasticsearch for API Gateway 10.2
-============================================================================
+Configuring External Elasticsearch for API Gateway 10.2
+=======================================================
 
 Created by James, Clench Paign, last modified on Sep 14, 2019
 
