@@ -1,9 +1,6 @@
-RnD API Management : Securing APIs using thirdparty OAuth2 identity provider support in API Gateway  
 
-1.  [RnD API Management](index.html)
-
-RnD API Management : Securing APIs using thirdparty OAuth2 identity provider support in API Gateway
-===================================================================================================
+Securing APIs using thirdparty OAuth2 identity provider support in API Gateway
+==============================================================================
 
 Created by Thangavelu, Dharmaraj, last modified by James, Clench Paign on Apr 26, 2018
 
