@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RnD API Management : Configuring External Elasticsearch for API Gateway 10.2</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">RnD API Management</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            RnD API Management : Configuring External Elasticsearch for API Gateway 10.2
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> James, Clench Paign</span>, last modified on Sep 14, 2019
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h4 id="ConfiguringExternalElasticsearchforAPIGateway10.2-Author:Jagadish,Dinesh(External)">Author: Jagadish, Dinesh (External)</h4><h4 id="ConfiguringExternalElasticsearchforAPIGateway10.2-SupportedVersions:">Supported Versions:</h4><p>10.2</p><h1 id="ConfiguringExternalElasticsearchforAPIGateway10.2-Overviewofthetutorial">Overview of the tutorial</h1><p>This tutorial explains how an Elasticsearch in an external system can be configured in API Gateway as back end data store instead of the readily available EventDataStore that is shipped with API Gateway.</p><h1 id="ConfiguringExternalElasticsearchforAPIGateway10.2-Requiredknowledge">Required knowledge</h1><ul><li><p>A basic understanding of API Gateway and its communication with EventDataStore for storing data</p></li><li><p>A basic understanding of Kibana and its communication with EventDataStore to retrieve analytics data for rendering dashboards in API Gateway</p></li></ul><h1 id="ConfiguringExternalElasticsearchforAPIGateway10.2-Why?">Why?</h1><p>API Gateway ships with EventDataStore, a wrapper product over ElasticSeach 5.6.4 (as of API Gateway 10.2), for storing data. But in some cases the API Provider might need API Gateway to connect to an external Elasticsearch for storing data. For example the Provider might already have a licensed Elasticsearch and would like to use that for API Gateway instead of going with the EventDataStore. Another case is, the Provider needs to create a new API Gateway instance in the Integration Server. This would not create a new instance of EventDataStore for it as only one instance of EventDataStore will be installed and exist for all the instances of API Gateway in the same installation. In this case the Provider can install an Elasticsearch instance outside the product or in an external machine and use it for the newly created API Gateway instance.</p><h1 id="ConfiguringExternalElasticsearchforAPIGateway10.2-Prerequisitesteps">Prerequisite steps</h1><p>Complete the below prerequisite steps before configuring external Elasticsearch in API Gateway.</p><ul><li>Install API Gateway advanced edition of version 10.2 and above</li><li>Install external Elasticsearch instance of versions above 5.6.x</li></ul><h1 id="ConfiguringExternalElasticsearchforAPIGateway10.2-Details">Details</h1><p>The below section explains the configuration details need for connecting API Gateway to an external Elastisearch instance.</p><h2 id="ConfiguringExternalElasticsearchforAPIGateway10.2-ChangingKibanaconfigurationstoconnecttoElasticsearch">Changing Kibana configurations to connect to Elasticsearch</h2><p>Now we need to modify the Kibana server configurations to connect to the Elasticsearch for rendering dashboards in API Gateway.</p><p>Open <em><strong>uiconfiguration.properties</strong></em> file from the directory <em><strong>&lt;SAG-Home&gt;\profiles\IS_instance_name\apigateway\config</strong></em>. Set <em><strong>apigw.kibana.autostart</strong></em> to <em><strong>false</strong></em>.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" width="892" src="attachments/530136201/607387741.png" data-image-src="attachments/530136201/607387741.png" data-unresolved-comment-count="0" data-linked-resource-id="607387741" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2019-9-14_13-28-15.png" data-base-url="https://iwiki.eur.ad.sag" data-linked-resource-content-type="image/png" data-linked-resource-container-id="530136201" data-linked-resource-container-version="7"></span></p><p>Open <em><strong>kibana.yml</strong></em> file from the directory <em><strong>&lt;SAG-Home&gt;\profiles\IS_instance_name\apigateway\dashboard\config\kibana.yml</strong></em> . Set elasticsearch.url: http://&lt;external elasticsearch host:port&gt;, for e.g <span class="nolink"><a href="http://localhost:9200" class="external-link" rel="nofollow">http://localhost:9200</a></span></p><p><span class="nolink"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="400" src="attachments/530136201/530136238.png" data-image-src="attachments/530136201/530136238.png" data-unresolved-comment-count="0" data-linked-resource-id="530136238" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2018-6-29_10-41-23.png" data-base-url="https://iwiki.eur.ad.sag" data-linked-resource-content-type="image/png" data-linked-resource-container-id="530136201" data-linked-resource-container-version="7"></span></span></p><p><span class="nolink">Now start the Kibana manually by running the <em><strong>kibanat.bat</strong></em> in the location <em><strong>&lt;SAG-Home&gt;\profiles\IS_instance_name\apigateway\dashboard\bin.</strong></em></span></p><p><span class="nolink"><em><strong><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="400" src="attachments/530136201/607387742.png" data-image-src="attachments/530136201/607387742.png" data-unresolved-comment-count="0" data-linked-resource-id="607387742" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2019-9-14_13-32-48.png" data-base-url="https://iwiki.eur.ad.sag" data-linked-resource-content-type="image/png" data-linked-resource-container-id="530136201" data-linked-resource-container-version="7"></span><br/></strong></em></span></p><h2 id="ConfiguringExternalElasticsearchforAPIGateway10.2-ChangingAPIGatewayconfigurationstoconnecttoElasticsearch">Changing API Gateway configurations to connect to Elasticsearch</h2><p>Follow the below steps to change the API Gateway configurations to connect to EventDataStore.</p><p>Go to <em><strong>&lt;SAG_HOME&gt;/IntegrationServer/instances/default/packages/WmAPIGateway/config/resources/elasticsearch</strong></em> and open <em><strong>config.properties</strong></em> file.</p><p>pg.gateway.elasticsearch.autostart=false<br/>pg.gateway.elasticsearch.hosts=&lt;external elasticsearch host:port&gt;</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="400" src="attachments/530136201/530136228.png" data-image-src="attachments/530136201/530136228.png" data-unresolved-comment-count="0" data-linked-resource-id="530136228" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2018-6-29_10-35-32.png" data-base-url="https://iwiki.eur.ad.sag" data-linked-resource-content-type="image/png" data-linked-resource-container-id="530136201" data-linked-resource-container-version="7"></span></p><p>After making the configurations, start the Elasticsearch. After Elasticsearch is up and running, start the API Gateway. Now you would be able to login to API Gateway, create APIs and see the analytics page for dashboards.</p><h1 id="ConfiguringExternalElasticsearchforAPIGateway10.2-Limitations">Limitations</h1><ul><li>These configurations are applicable for API Gateway versions 10.2 and above. For 10.1 and below refer <a href="https://iwiki.eur.ad.sag/display/RNDWMGDM/Configuring+External+Elasticsearch+for+API+Gateway+10.1">Configuring External Elasticsearch for API Gateway 10.1</a></li></ul><h1 id="ConfiguringExternalElasticsearchforAPIGateway10.2-References">References</h1><ul><li>Refer <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.6/zip-windows.html" class="external-link" rel="nofollow">https://www.elastic.co/guide/en/elasticsearch/reference/5.6/zip-windows.html</a> for Elasticsearch installation</li></ul><h1 id="ConfiguringExternalElasticsearchforAPIGateway10.2-Learnmore">Learn more</h1><ul><li>Refer <a href="https://iwiki.eur.ad.sag/display/RNDWMGDM/Configuring+External+Elasticsearch+for+API+Gateway+10.1">Configuring External Elasticsearch for API Gateway 10.1</a> for configuring external Elasticsearch for API Gateway version 10.1 and below</li><li>Refer <a href="https://iwiki.eur.ad.sag/display/RNDWMGDM/Securing+Elasticsearch+for+API+Gateway+10.2">Securing Elasticsearch for API Gateway 10.2</a> for a tutorial on securing the Elasticsearch instance</li></ul><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/530136201/530136226.png">image2018-6-29_10-33-13.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/530136201/530136527.png">image2018-6-29_10-35-32.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/530136201/530136526.png">image2018-6-29_10-41-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/530136201/530136238.png">image2018-6-29_10-41-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/530136201/530136228.png">image2018-6-29_10-35-32.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/530136201/607387741.png">image2019-9-14_13-28-15.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/530136201/607387742.png">image2019-9-14_13-32-48.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                 
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Apr 03, 2020 08:52</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
