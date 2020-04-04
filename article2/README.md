@@ -437,5 +437,3 @@ Learn more
 *   [Securing APIs using OpenID Connect in API Gateway](https://iwiki.eur.ad.sag/display/RNDWMGDM/Securing+APIs+using+OpenID+Connect+in+API+Gateway)
 *   [Securing APIs with JSON Web Token in API Gateway](https://iwiki.eur.ad.sag/display/RNDWMGDM/Securing+APIs+with+JSON+Web+Token+in+API+Gateway)
 *   [Securing API using Kerberos at the Message Level](https://iwiki.eur.ad.sag/display/RNDWMGDM/Securing+API+using+Kerberos+at+the+Message+Level)
-
-[Atlassian](http://www.atlassian.com/)
