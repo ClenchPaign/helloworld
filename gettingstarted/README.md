@@ -1,5 +1,5 @@
-RnD API Management : GitHub Home - API Gateway
-==============================================
+GitHub Home - API Gateway
+=========================
 
 Created by Vaidyanathan, Praveen Kumar, last modified on Apr 08, 2020
 
